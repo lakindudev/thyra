@@ -3,8 +3,9 @@ import { runVersion } from "~/commands/version";
 import { runOpen } from "~/commands/open";
 import { runList } from "~/commands/list";
 import { runHelp } from "~/commands/help";
-import { runRemove } from "~/commands/remove";
+import { runReset } from "~/commands/reset";
 import { runUpdate as runUpdateCmd } from "~/commands/update";
+import { runImport } from "~/commands/import";
 
 import { getConfigFilePath, ConfigStore } from "~/configStore";
 
@@ -34,14 +35,17 @@ import { getConfigFilePath, ConfigStore } from "~/configStore";
     case "open":
       runOpen(store, rest);
       break;
-    case "remove":
-      runRemove(store, rest);
+    case "reset":
+      runReset(store, rest);
       break;
     case "update":
       runUpdateCmd(store, rest);
       break;
     case "list":
       runList(store);
+      break;
+    case "import":
+      runImport(store, rest);
       break;
     default:
       console.error(`Unknown command: ${command}`);

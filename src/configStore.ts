@@ -36,9 +36,12 @@ export function getConfigFilePath(): string[] {
   ];
 }
 
+import crypto from "node:crypto";
+import type { ProjectEntry } from "~/types";
+
 export class ConfigStore {
   private filePath: string;
-  private data: Record<string, string>;
+  private data: Record<string, ProjectEntry>;
 
   public versionDataFilePath: string;
 
@@ -48,7 +51,7 @@ export class ConfigStore {
     this.data = this.load();
   }
 
-  private load(): Record<string, string> {
+  private load(): Record<string, ProjectEntry> {
     if (!fs.existsSync(this.filePath)) {
       return {};
     }
@@ -57,7 +60,22 @@ export class ConfigStore {
       const raw = fs.readFileSync(this.filePath, "utf8");
       const parsed = JSON.parse(raw);
       if (parsed && typeof parsed === "object") {
-        return parsed;
+        const migrated: Record<string, ProjectEntry> = {};
+        for (const [key, value] of Object.entries(parsed)) {
+          if (typeof value === "string") {
+            // Migrate old string-based config to new ProjectEntry
+            migrated[key] = {
+              id: crypto.randomUUID(),
+              name: key,
+              alias: key,
+              path: value,
+              createdAt: new Date().toISOString(),
+            };
+          } else {
+            migrated[key] = value as ProjectEntry;
+          }
+        }
+        return migrated;
       }
       console.warn("Config file is not an object. Resetting.");
       return {};
@@ -82,17 +100,21 @@ export class ConfigStore {
     }
   }
 
-  set(key: string, value: string): void {
-    this.data[key] = value;
+  set(key: string, entry: ProjectEntry): void {
+    this.data[key] = entry;
     this.save();
   }
 
-  get(key: string): string | undefined {
+  get(key: string): ProjectEntry | undefined {
     return this.data[key];
   }
 
   has(key: string): boolean {
     return Object.prototype.hasOwnProperty.call(this.data, key);
+  }
+
+  existsByPath(targetPath: string): boolean {
+    return Object.values(this.data).some((entry) => entry.path === targetPath);
   }
 
   delete(key: string): void {
@@ -102,7 +124,20 @@ export class ConfigStore {
     }
   }
 
-  all(): Record<string, string> {
+  clear(): void {
+    this.data = {};
+    this.save();
+  }
+
+  clearCache(): void {
+    this.data = {};
+  }
+
+  reload(): void {
+    this.data = this.load();
+  }
+
+  all(): Record<string, ProjectEntry> {
     return { ...this.data };
   }
 }
