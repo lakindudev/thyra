@@ -23,6 +23,10 @@ export function runHelp(exitCode: number) {
       Description: "Open folder in your editor",
     },
     {
+      Command: colorize("thyra recent [--all] [--limit <n>]"),
+      Description: "Show recently opened projects",
+    },
+    {
       Command: colorize("thyra update <name> <folder_path>"),
       Description: "Update an existing saved path",
     },
@@ -47,6 +51,9 @@ export function runHelp(exitCode: number) {
     )}
   ${colorize("thyra open <name>")}                   ${color.dim(
       "# Open in editor"
+    )}
+  ${colorize("thyra recent")}                        ${color.dim(
+      "# Show recently opened projects"
     )}
   ${colorize("thyra update <name> <folder_path>")} ${color.dim(
       "# Update an existing saved path"

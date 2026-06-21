@@ -6,6 +6,7 @@ import { runHelp } from "~/commands/help";
 import { runReset } from "~/commands/reset";
 import { runUpdate as runUpdateCmd } from "~/commands/update";
 import { runImport } from "~/commands/import";
+import { runRecent } from "~/commands/recent";
 
 import { getConfigFilePath, ConfigStore } from "~/configStore";
 
@@ -34,6 +35,9 @@ import { getConfigFilePath, ConfigStore } from "~/configStore";
       break;
     case "open":
       runOpen(store, rest);
+      break;
+    case "recent":
+      runRecent(store, rest);
       break;
     case "reset":
       runReset(store, rest);

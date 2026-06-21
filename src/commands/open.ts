@@ -99,5 +99,10 @@ export function runOpen(store: ConfigStore, args: string[]): void {
   }
 
   ensureDirectoryExists(entry.path);
+  
+  entry.lastOpenedAt = new Date().toISOString();
+  entry.openCount = (entry.openCount || 0) + 1;
+  store.set(name, entry);
+
   openInEditor(entry.path);
 }
