@@ -1,9 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+
 import color from "picocolors";
-import type { ConfigStore } from "~/configStore";
-import { resolveFolderPath } from "~/utils/path";
+
+import { resolveFolderPath } from "~/utils";
+import type { ConfigStore } from "~/core";
 
 type ExecutionMode = "real" | "dry-run";
 

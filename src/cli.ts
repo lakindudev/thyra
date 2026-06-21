@@ -1,13 +1,14 @@
-import { runConfig } from "~/commands/config";
-import { runVersion } from "~/commands/version";
-import { runOpen } from "~/commands/open";
-import { runList } from "~/commands/list";
-import { runHelp } from "~/commands/help";
-import { runReset } from "~/commands/reset";
-import { runUpdate as runUpdateCmd } from "~/commands/update";
-import { runImport } from "~/commands/import";
-
-import { getConfigFilePath, ConfigStore } from "~/configStore";
+import {
+  runConfig,
+  runVersion,
+  runOpen,
+  runList,
+  runHelp,
+  runRemove,
+  runUpdate,
+  runImport,
+} from "./commands";
+import { getConfigFilePath, ConfigStore } from "~/core";
 
 (function run() {
   const [, , command, ...rest] = process.argv;
@@ -35,11 +36,11 @@ import { getConfigFilePath, ConfigStore } from "~/configStore";
     case "open":
       runOpen(store, rest);
       break;
-    case "reset":
-      runReset(store, rest);
+    case "remove":
+      runRemove(store, rest);
       break;
     case "update":
-      runUpdateCmd(store, rest);
+      runUpdate(store, rest);
       break;
     case "list":
       runList(store);

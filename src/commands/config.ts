@@ -1,7 +1,8 @@
 import crypto from "node:crypto";
-import type { ConfigStore } from "~/configStore";
-import { resolveFolderPath, ensureDirectoryExists } from "~/utils/path";
 import path from "node:path";
+
+import { resolveFolderPath, ensureDirectoryExists } from "~/utils";
+import  { ConfigStore } from "~/core";
 
 export function runConfig(store: ConfigStore, args: string[]): void {
   const name = args[0];

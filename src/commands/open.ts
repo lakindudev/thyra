@@ -1,6 +1,9 @@
-import fs from "node:fs";
 import { exec } from "node:child_process";
+
 import color from "picocolors";
+
+import { ConfigStore } from "~/core";
+import { ensureDirectoryExists } from "~/utils";
 
 function openInEditor(folderPath: string) {
   const editorCmd = process.env.THYRA_EDITOR || "code";
@@ -50,9 +53,6 @@ function levenshteinDistance(a: string, b: string): number {
   }
   return matrix[a.length][b.length];
 }
-
-import type { ConfigStore } from "~/configStore";
-import { ensureDirectoryExists } from "~/utils/path";
 
 export function runOpen(store: ConfigStore, args: string[]): void {
   const name = args[0];

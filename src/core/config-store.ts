@@ -1,6 +1,9 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import crypto from "node:crypto";
+
+import type { ProjectEntry } from "~/types";
 
 const CONFIG_FILE_NAME = "thyra.json";
 const THYRA_VERSION_DATA_FILE_NAME = "thyra.version.json";
@@ -35,9 +38,6 @@ export function getConfigFilePath(): string[] {
     path.join(appConfigDir, THYRA_VERSION_DATA_FILE_NAME),
   ];
 }
-
-import crypto from "node:crypto";
-import type { ProjectEntry } from "~/types";
 
 export class ConfigStore {
   private filePath: string;
@@ -77,11 +77,11 @@ export class ConfigStore {
         }
         return migrated;
       }
-      console.warn("Config file is not an object. Resetting.");
+      console.warn("Config file is not an object. removeting.");
       return {};
     } catch (err) {
       const error = err as Error;
-      console.warn("Failed to read config file. Resetting.", error.message);
+      console.warn("Failed to read config file. removeting.", error.message);
       return {};
     }
   }

@@ -1,6 +1,6 @@
 import color from "picocolors";
 
-import { colorize, printCommandTable } from "~/color-logs";
+import { colorize, printCommandTable } from "~/core";
 
 export function runHelp(exitCode: number) {
   console.log(
@@ -27,7 +27,7 @@ export function runHelp(exitCode: number) {
       Description: "Update an existing saved path",
     },
     {
-      Command: colorize("thyra reset <name> | --all"),
+      Command: colorize("thyra remove <name> | --all"),
       Description: "Remove a saved path or all paths",
     },
     { Command: colorize("thyra list"), Description: "Show all saved paths" },
@@ -51,10 +51,10 @@ export function runHelp(exitCode: number) {
   ${colorize("thyra update <name> <folder_path>")} ${color.dim(
       "# Update an existing saved path"
     )}
-  ${colorize("thyra reset <name>")}                ${color.dim(
+  ${colorize("thyra remove <name>")}                ${color.dim(
       "# Remove a saved path"
     )}
-  ${colorize("thyra reset --all")}                 ${color.dim(
+  ${colorize("thyra remove --all")}                 ${color.dim(
       "# Remove all saved paths"
     )}
   ${colorize("thyra --version")}
