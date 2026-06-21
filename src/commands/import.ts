@@ -20,11 +20,11 @@ function formatImportResult(mode: ExecutionMode, importedCount: number, skippedC
   if (mode === "dry-run") {
     console.log(color.yellow("[DRY RUN] Simulation mode. No registry changes made.\n"));
     console.log(color.bold(`Would import: ${importedCount}`));
-    if (skippedCount > 0) console.log(color.dim(`Would skip:  ${skippedCount} (already exist)`));
+    if (skippedCount > 0) console.log(color.dim(`Would skip:  ${skippedCount} (already exists)`));
     if (collisionsCount > 0) console.log(color.dim(`Would resolve collision: ${collisionsCount}`));
   } else {
     console.log(color.bold(`Imported: ${importedCount}`));
-    if (skippedCount > 0) console.log(color.dim(`Skipped:  ${skippedCount} (already exist)`));
+    if (skippedCount > 0) console.log(color.dim(`Skipped:  ${skippedCount} (already exists)`));
     if (collisionsCount > 0) console.log(color.dim(`Resolved collision: ${collisionsCount}`));
   }
   console.log("");

@@ -5,7 +5,7 @@ import { spawn } from "node:child_process";
 
 import { ConfigStore } from "~/core";
 
-import { version } from "package" assert { type: "json" };
+import { version } from "package" with { type: "json" };
 
 function saveVersionCheckData(store: ConfigStore, data: Record<string, any>) {
   try {
@@ -24,7 +24,7 @@ function loadVersionCheckData(store: ConfigStore) {
     );
     return parsed && typeof parsed === "object" ? parsed : {};
   } catch (err: any) {
-    console.warn("Failed to read version check file. removeting.", err.message);
+    console.error("Failed to load version check file:", err.message);
     return {};
   }
 }

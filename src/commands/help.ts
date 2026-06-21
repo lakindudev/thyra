@@ -27,8 +27,8 @@ export function runHelp(exitCode: number) {
       Description: "Update an existing saved path",
     },
     {
-      Command: colorize("thyra remove <name> | --all"),
-      Description: "Remove a saved path or all paths",
+      Command: colorize("thyra remove <name> | --all | --force"),
+      Description: "Remove a saved path or all paths (--force to skip confirmation)",
     },
     { Command: colorize("thyra list"), Description: "Show all saved paths" },
     { Command: colorize("thyra --version"), Description: "Show CLI version" },
