@@ -15,6 +15,10 @@ export function runHelp(exitCode: number) {
       Description: "Save a folder path",
     },
     {
+      Command: colorize("thyra import <directory>"),
+      Description: "Scan and register projects from a directory",
+    },
+    {
       Command: colorize("thyra open <name>"),
       Description: "Open folder in your editor",
     },
@@ -23,8 +27,8 @@ export function runHelp(exitCode: number) {
       Description: "Update an existing saved path",
     },
     {
-      Command: colorize("thyra remove <name>"),
-      Description: "Remove a saved path",
+      Command: colorize("thyra reset <name> | --all"),
+      Description: "Remove a saved path or all paths",
     },
     { Command: colorize("thyra list"), Description: "Show all saved paths" },
     { Command: colorize("thyra --version"), Description: "Show CLI version" },
@@ -38,14 +42,20 @@ export function runHelp(exitCode: number) {
   ${colorize("thyra config <name> <folder_path>")}   ${color.dim(
       "# Save a path"
     )}
+  ${colorize("thyra import ./projects")}             ${color.dim(
+      "# Import multiple projects"
+    )}
   ${colorize("thyra open <name>")}                   ${color.dim(
       "# Open in editor"
     )}
   ${colorize("thyra update <name> <folder_path>")} ${color.dim(
       "# Update an existing saved path"
     )}
-  ${colorize("thyra remove <name>")}               ${color.dim(
+  ${colorize("thyra reset <name>")}                ${color.dim(
       "# Remove a saved path"
+    )}
+  ${colorize("thyra reset --all")}                 ${color.dim(
+      "# Remove all saved paths"
     )}
   ${colorize("thyra --version")}
 
