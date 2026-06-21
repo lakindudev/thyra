@@ -122,7 +122,7 @@ thyra --version
 **Output**
 
 ```
-v1.0.5
+v1.3.0
 ```
 
 This shows the currently installed version of **thyra**.
