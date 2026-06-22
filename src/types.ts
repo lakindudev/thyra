@@ -6,4 +6,5 @@ export interface ProjectEntry {
   createdAt: string;
   lastOpenedAt?: string;
   openCount?: number;
+  favorite?: boolean;
 }

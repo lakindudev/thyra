@@ -7,7 +7,9 @@ import { runReset } from "~/commands/reset";
 import { runUpdate as runUpdateCmd } from "~/commands/update";
 import { runImport } from "~/commands/import";
 import { runRecent } from "~/commands/recent";
-
+import { runFavorite } from "~/commands/favorite";
+import { runUnfavorite } from "~/commands/unfavorite";
+import { runFavorites } from "~/commands/favorites";
 import { getConfigFilePath, ConfigStore } from "~/configStore";
 
 (function run() {
@@ -50,6 +52,15 @@ import { getConfigFilePath, ConfigStore } from "~/configStore";
       break;
     case "import":
       runImport(store, rest);
+      break;
+    case "favorite":
+      runFavorite(store, rest);
+      break;
+    case "unfavorite":
+      runUnfavorite(store, rest);
+      break;
+    case "favorites":
+      runFavorites(store);
       break;
     default:
       console.error(`Unknown command: ${command}`);

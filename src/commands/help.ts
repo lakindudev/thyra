@@ -35,6 +35,18 @@ export function runHelp(exitCode: number) {
       Description: "Remove a saved path or all paths",
     },
     { Command: colorize("thyra list"), Description: "Show all saved paths" },
+    {
+      Command: colorize("thyra favorite <name>"),
+      Description: "Mark a project as favorite",
+    },
+    {
+      Command: colorize("thyra unfavorite <name>"),
+      Description: "Remove a project from favorites",
+    },
+    {
+      Command: colorize("thyra favorites"),
+      Description: "List all favorite projects",
+    },
     { Command: colorize("thyra --version"), Description: "Show CLI version" },
     { Command: colorize("thyra --help"), Description: "Show this help" },
   ];

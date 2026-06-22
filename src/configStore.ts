@@ -70,9 +70,14 @@ export class ConfigStore {
               alias: key,
               path: value,
               createdAt: new Date().toISOString(),
+              favorite: false,
             };
           } else {
-            migrated[key] = value as ProjectEntry;
+            const entry = value as ProjectEntry;
+            if (entry.favorite === undefined) {
+              entry.favorite = false;
+            }
+            migrated[key] = entry;
           }
         }
         return migrated;

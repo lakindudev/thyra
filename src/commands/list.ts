@@ -16,8 +16,9 @@ export function runList(store: ConfigStore) {
 
   const rows = keys.map((key) => {
     const entry = all[key];
+    const prefix = entry.favorite ? "⭐ " : "  ";
     return {
-      Command: color.cyan(entry.alias || key),
+      Command: prefix + color.cyan(entry.alias || key),
       Description: color.dim(entry.path),
     };
   });
