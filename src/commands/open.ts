@@ -6,7 +6,7 @@ import { ConfigStore } from "~/core";
 import { ensureDirectoryExists } from "~/utils";
 
 function openInEditor(folderPath: string) {
-  const editorCmd = process.env.THYRA_EDITOR || "code";
+  const editorCmd = process.env.EDITOR || "code";
   let safePath = folderPath;
   if (editorCmd.trim() !== "explorer") {
     safePath = folderPath.replace(/(["\\$`])/g, "\\$1");

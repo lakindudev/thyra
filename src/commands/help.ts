@@ -60,7 +60,7 @@ export function runHelp(exitCode: number) {
   ${colorize("thyra --version")}
 
 ${color.bold(color.underline("Environment:"))}
-  ${color.cyan("THYRA_EDITOR")}  ${color.dim(
+  ${color.cyan("EDITOR")}  ${color.dim(
       'Editor command (default: "code")'
     )}
 `
