@@ -1,8 +1,6 @@
 import color from "picocolors";
 
-import { colorize, printCommandTable } from "~/color-logs";
-
-import type { ConfigStore } from "~/configStore";
+import { colorize, printCommandTable, ConfigStore } from "~/core";
 
 export function runList(store: ConfigStore) {
   const all = store.all();
@@ -14,10 +12,13 @@ export function runList(store: ConfigStore) {
     return;
   }
 
-  const rows = keys.map((key) => ({
-    Command: color.cyan(key),
-    Description: color.dim(all[key]),
-  }));
+  const rows = keys.map((key) => {
+    const entry = all[key];
+    return {
+      Command: color.cyan(entry.alias || key),
+      Description: color.dim(entry.path),
+    };
+  });
 
   console.log("\n" + color.bold("Saved folders:\n"));
 

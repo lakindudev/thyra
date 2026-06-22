@@ -4,7 +4,7 @@ A tiny CLI to bookmark project folders under short names and open them instantly
 
 [![npm version](https://img.shields.io/npm/v/thyra.svg)](https://www.npmjs.com/package/thyra)
 [![npm downloads](https://img.shields.io/npm/dm/thyra.svg)](https://www.npmjs.com/package/thyra)
-![Node](https://img.shields.io/badge/node-%3E%3D14.0.0-339933)
+![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-339933)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 **thyra** is designed for developers who hop between multiple projects and want a faster, keyboard-only way to jump straight into a folder—no file explorer, no hassle.
@@ -14,6 +14,7 @@ A tiny CLI to bookmark project folders under short names and open them instantly
 ## Features
 
 - Save any directory under a short, memorable name
+- Import multiple project folders from a parent directory
 - Open saved directories instantly from the terminal
 - Check the CLI version easily (`thyra version`)
 - Works with any editor (VS Code, WebStorm, Vim, Sublime Text, Emacs, etc.)
@@ -29,7 +30,7 @@ A tiny CLI to bookmark project folders under short names and open them instantly
 npm install -g thyra
 ```
 
-> Requires **Node.js v14+**.
+> Requires **Node.js v18+**.
 
 After install, the `thyra` command will be available system-wide.
 
@@ -41,6 +42,9 @@ After install, the `thyra` command will be available system-wide.
 # Save projects
 thyra config blog ~/projects/personal-blog
 thyra config api /var/www/company/api
+
+# Import projects from a directory
+thyra import ~/projects
 
 # Open instantly
 thyra open blog
@@ -67,6 +71,20 @@ thyra config <name> <path>
 thyra config blog ~/projects/personal-blog
 thyra config api /var/www/company/api
 ```
+
+### Import project folders from a directory
+
+```bash
+thyra import <directory>
+```
+
+**Example**
+
+```bash
+thyra import ~/projects
+```
+
+This scans the target directory, registers each project folder it finds, and skips entries that already exist.
 
 ### Open a saved project
 
@@ -104,7 +122,7 @@ thyra --version
 **Output**
 
 ```
-v1.0.5
+v1.3.0
 ```
 
 This shows the currently installed version of **thyra**.
@@ -135,6 +153,16 @@ Remove an alias from your saved mappings. This cannot be undone except by re-run
 
 ```bash
 thyra remove api
+```
+
+You can also remove all saved projects at once using the `--all` flag. By default this prompts for confirmation; pass `--force` to skip the prompt.
+
+```bash
+# Prompt for confirmation
+thyra remove --all
+
+# Skip confirmation
+thyra remove --all --force
 ```
 
 ### Help

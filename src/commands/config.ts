@@ -1,5 +1,8 @@
-import type { ConfigStore } from "~/configStore";
-import { resolveFolderPath, ensureDirectoryExists } from "~/utils/path";
+import crypto from "node:crypto";
+import path from "node:path";
+
+import { resolveFolderPath, ensureDirectoryExists } from "~/utils";
+import  { ConfigStore } from "~/core";
 
 export function runConfig(store: ConfigStore, args: string[]): void {
   const name = args[0];
@@ -14,6 +17,14 @@ export function runConfig(store: ConfigStore, args: string[]): void {
   const folderPath = resolveFolderPath(folderArg);
   ensureDirectoryExists(folderPath);
 
-  store.set(name, folderPath);
+  const folderName = path.basename(folderPath);
+
+  store.set(name, {
+    id: crypto.randomUUID(),
+    name: folderName || name,
+    alias: name,
+    path: folderPath,
+    createdAt: new Date().toISOString(),
+  });
   console.log(`Saved mapping: "${name}" -> ${folderPath}`);
 }

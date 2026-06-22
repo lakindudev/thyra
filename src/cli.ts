@@ -1,12 +1,14 @@
-import { runConfig } from "~/commands/config";
-import { runVersion } from "~/commands/version";
-import { runOpen } from "~/commands/open";
-import { runList } from "~/commands/list";
-import { runHelp } from "~/commands/help";
-import { runRemove } from "~/commands/remove";
-import { runUpdate as runUpdateCmd } from "~/commands/update";
-
-import { getConfigFilePath, ConfigStore } from "~/configStore";
+import {
+  runConfig,
+  runVersion,
+  runOpen,
+  runList,
+  runHelp,
+  runRemove,
+  runUpdate,
+  runImport,
+} from "./commands";
+import { getConfigFilePath, ConfigStore } from "~/core";
 
 (function run() {
   const [, , command, ...rest] = process.argv;
@@ -38,10 +40,13 @@ import { getConfigFilePath, ConfigStore } from "~/configStore";
       runRemove(store, rest);
       break;
     case "update":
-      runUpdateCmd(store, rest);
+      runUpdate(store, rest);
       break;
     case "list":
       runList(store);
+      break;
+    case "import":
+      runImport(store, rest);
       break;
     default:
       console.error(`Unknown command: ${command}`);
