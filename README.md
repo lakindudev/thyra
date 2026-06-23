@@ -177,14 +177,14 @@ thyra --help
 
 By default, **thyra** uses **VS Code** (`code`) if it’s available.
 
-To use a different editor, set the `THYRA_EDITOR` environment variable:
+To use a different editor, set the `EDITOR` environment variable:
 
 ```bash
 # one-off for current shell
-THYRA_EDITOR=webstorm thyra open blog
+EDITOR=webstorm thyra open blog
 
 # or set it permanently (bash/zsh)
-export THYRA_EDITOR=webstorm
+export EDITOR=webstorm
 ```
 
 ### Common editor commands
@@ -201,7 +201,7 @@ export THYRA_EDITOR=webstorm
 Tip (Windows, PowerShell):
 
 ```powershell
-setx THYRA_EDITOR "webstorm"
+setx EDITOR "webstorm"
 ```
 
 ---
@@ -252,7 +252,7 @@ thyra version
   Ensure global npm binaries are on your PATH. On macOS/Linux, this is often `$HOME/.npm-global/bin` or the Node version manager’s bin directory.
 
 - **Editor doesn’t open**
-  Confirm the editor command works by itself (e.g., run `webstorm .` or `code .` in any folder). If it does, set `THYRA_EDITOR` to that command.
+  Confirm the editor command works by itself (e.g., run `webstorm .` or `code .` in any folder). If it does, set `EDITOR` to that command.
 
 - **Paths with spaces**
   Wrap the path in quotes when configuring:
