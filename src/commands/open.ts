@@ -1,39 +1,40 @@
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 
 import color from "picocolors";
 
 import { ConfigStore } from "~/core";
 import { ensureDirectoryExists } from "~/utils";
 
+function quoteShellArg(value: string): string {
+  if (process.platform === "win32") return `"${value.replace(/"/g, '""')}"`;
+  return `'${value.replace(/'/g, `'\\''`)}'`;
+}
+
 function openInEditor(folderPath: string) {
   const editorCmd = process.env.EDITOR || "code";
-  let safePath = folderPath;
-  if (editorCmd.trim() !== "explorer") {
-    safePath = folderPath.replace(/(["\\$`])/g, "\\$1");
-  }
-  const command = `${editorCmd} "${safePath}"`;
+  const command = `${editorCmd} ${quoteShellArg(folderPath)}`;
 
   console.log(`Opening "${folderPath}" in "${editorCmd}"...`);
 
-  const child = exec(command, (error, stdout, stderr) => {
-    if (stdout) {
-      process.stdout.write(stdout);
-    }
-    if (stderr) {
-      process.stderr.write(stderr);
-    }
+  const child = spawn(command, {
+    shell: true,
+    stdio: "inherit",
+  });
 
-    if (error && editorCmd !== "explorer") {
-      console.error(
-        `Failed to start editor "${editorCmd}". Is it installed and on your PATH?`
-      );
+  child.on("error", (error) => {
+    if (editorCmd !== "explorer") {
+      console.error(`Failed to start editor "${editorCmd}". Is it installed and on your PATH?`);
       console.error(error.message);
       process.exit(1);
     }
   });
 
-  if (child.stdout) child.stdout.pipe(process.stdout);
-  if (child.stderr) child.stderr.pipe(process.stderr);
+  child.on("close", (code) => {
+    if (code && editorCmd !== "explorer") {
+      console.error(`Editor "${editorCmd}" exited with code ${code}.`);
+      process.exit(code);
+    }
+  });
 }
 
 function levenshteinDistance(a: string, b: string): number {
