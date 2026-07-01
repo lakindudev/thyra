@@ -1,6 +1,6 @@
 import color from "picocolors";
 
-import { colorize, printCommandTable } from "~/color-logs";
+import { colorize, printCommandTable } from "~/core";
 
 export function runHelp(exitCode: number) {
   console.log(
@@ -27,8 +27,8 @@ export function runHelp(exitCode: number) {
       Description: "Update an existing saved path",
     },
     {
-      Command: colorize("thyra reset <name> | --all"),
-      Description: "Remove a saved path or all paths",
+      Command: colorize("thyra remove <name> | --all | --force"),
+      Description: "Remove a saved path or all paths (--force to skip confirmation)",
     },
     { Command: colorize("thyra list"), Description: "Show all saved paths" },
     { Command: colorize("thyra --version"), Description: "Show CLI version" },
@@ -51,16 +51,16 @@ export function runHelp(exitCode: number) {
   ${colorize("thyra update <name> <folder_path>")} ${color.dim(
       "# Update an existing saved path"
     )}
-  ${colorize("thyra reset <name>")}                ${color.dim(
+  ${colorize("thyra remove <name>")}                ${color.dim(
       "# Remove a saved path"
     )}
-  ${colorize("thyra reset --all")}                 ${color.dim(
+  ${colorize("thyra remove --all")}                 ${color.dim(
       "# Remove all saved paths"
     )}
   ${colorize("thyra --version")}
 
 ${color.bold(color.underline("Environment:"))}
-  ${color.cyan("THYRA_EDITOR")}  ${color.dim(
+  ${color.cyan("EDITOR")}  ${color.dim(
       'Editor command (default: "code")'
     )}
 `

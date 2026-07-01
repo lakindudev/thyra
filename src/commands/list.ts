@@ -1,8 +1,6 @@
 import color from "picocolors";
 
-import { colorize, printCommandTable } from "~/color-logs";
-
-import type { ConfigStore } from "~/configStore";
+import { colorize, printCommandTable, ConfigStore } from "~/core";
 
 export function runList(store: ConfigStore) {
   const all = store.all();

@@ -1,5 +1,5 @@
-import type { ConfigStore } from "~/configStore";
-import { resolveFolderPath, ensureDirectoryExists } from "~/utils/path";
+import { ConfigStore } from "~/core";
+import { resolveFolderPath, ensureDirectoryExists } from "~/utils";
 
 export function runUpdate(store: ConfigStore, args: string[]): void {
   const name = args[0];

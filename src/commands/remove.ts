@@ -1,8 +1,10 @@
-import type { ConfigStore } from "~/configStore";
 import readline from "node:readline";
+
 import color from "picocolors";
 
-export async function runReset(store: ConfigStore, args: string[]): Promise<void> {
+import type { ConfigStore } from "~/core";
+
+export async function runRemove(store: ConfigStore, args: string[]): Promise<void> {
   const isAll = args.includes("--all");
   const isForce = args.includes("--force");
 
@@ -46,8 +48,8 @@ export async function runReset(store: ConfigStore, args: string[]): Promise<void
   const name = args.find((arg) => !arg.startsWith("--"));
 
   if (!name) {
-    console.error("Missing <name> argument for 'reset' command.");
-    console.log("Usage: thyra reset <name> OR thyra reset --all");
+    console.error("Missing <name> argument for 'remove' command.");
+    console.log("Usage: thyra remove <name> OR thyra remove --all");
     process.exit(1);
   }
 
